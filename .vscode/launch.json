@@ -1,0 +1,59 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "Build Qmod",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "./buildQMOD.ps1",
+            "args": ["${input:args}"]
+        },
+        {
+            "name": "Build Qmod (no prompt)",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "./buildQMOD.ps1",
+            "args": ["${workspaceFolderBasename}"]
+        },
+        {
+            "name": "Clean Build Qmod",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "./buildQMOD.ps1",
+            "args": ["${input:args} -clean"]
+        },
+        {
+            "name": "Clean Build Qmod (no prompt)",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "./buildQMOD.ps1",
+            "args": ["${workspaceFolderBasename} -clean"]
+        },
+        {
+            "name": "Copy Qmod to Quest2",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "./copy.ps1",
+            "args": ["${input:args}"]
+        },
+        {
+            "name": "Clean Build and Copy Qmod to Quest2",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "./copy.ps1",
+            "args": ["${input:args} -clean"]
+        }
+    ],
+    "inputs": [
+        {
+            "id": "args",
+            "type":"promptString",
+            "description": "QMOD filename (Default= Folder Name)",
+            "default": "${workspaceFolderBasename}"
+        }
+    ]
+}

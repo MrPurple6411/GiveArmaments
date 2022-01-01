@@ -1,0 +1,14 @@
+{
+  "_QPVersion": "0.1.1",
+  "name": "GiveArmaments",
+  "id": "givearmaments",
+  "author": "MrPurple6411",
+  "version": "0.1.0",
+  "packageId": "com.schellgames.untilyoufall",
+  "packageVersion": "1.2.0.174045 (Release_1.2.0)",
+  "description": "Give all Armaments",
+  "dependencies": [],
+  "modFiles": ["libgivearmaments.so"],
+  "libraryFiles": ["libbeatsaber-hook_2_3_2.so"],
+  "fileCopies": []
+}
