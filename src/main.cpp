@@ -38,6 +38,23 @@ MAKE_HOOK_FIND_CLASS_UNSAFE_INSTANCE(PlayerHandStart, "SG.Claymore.Interaction",
     ::il2cpp_utils::RunMethod(Inventory, GiveAll);
 }
 
+MAKE_HOOK_FIND_CLASS_UNSAFE_INSTANCE(GiveArmamentX, "SG.Claymore.SaveSystem","ArmamentInventory", "GiveArmament", void, Il2CppObject* self, Il2CppObject* armamentID, int level)
+{
+    //Tries to get the MaxUpgradeLevel value from SG:Claymore::Armaments::ArmamentID.MaxUpgradeLevel
+    ::std::optional<int> MaxUpgradeLevel = ::il2cpp_utils::GetPropertyValue<int>(armamentID, "MaxUpgradeLevel");
+
+    //Validates it has actually returned something.
+    if(!MaxUpgradeLevel.has_value()){
+        getLogger().log(Logging::INFO,"MaxUpgradeLevel Not Found");
+        //if not found run the originally called code, so it doesn't break anything.
+        GiveArmamentX(self, armamentID, level);
+    }
+    int MaxLevel = MaxUpgradeLevel.value();
+
+    // Run the SG::Claymore::SaveSystem::ArmamentInventory.GiveArmament(ArmamentID armamentID, int level) method but setting the level to Max instead of whatever it was going to give.
+    GiveArmamentX(self, armamentID, MaxLevel);
+}
+
 // Loads the config from disk using our modInfo, then returns it for use
 Configuration &getConfig()
 {
@@ -71,5 +88,6 @@ extern "C" void load()
     getLogger().log(Logging::INFO,"Installing hooks...");
     // Install our hooks (none defined yet)
     INSTALL_HOOK(getLogger(), PlayerHandStart);
+    INSTALL_HOOK(getLogger(), GiveArmamentX);
     getLogger().log(Logging::INFO,"Installed all hooks!");
 }
