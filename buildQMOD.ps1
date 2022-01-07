@@ -1,5 +1,5 @@
 Param(
-    [String] $qmodname = "givearmaments",
+    [String] $qmodname = "GiveArmaments",
 
     [Parameter(Mandatory = $false)]
     [Switch] $clean,
